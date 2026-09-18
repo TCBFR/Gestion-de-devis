@@ -1,0 +1,1042 @@
+/* ============================================================
+   app.css — BiscaPhone · Catalogue public
+   Structure :
+     1. Variables & reset
+     2. Utilitaires Bootstrap complémentaires
+     3. Header : topbar + navbar
+     4. Banner hero
+     5. Section "Prix instantané" (stepper + cartes appareils)
+     6. Section catalogue (grille de pièces)
+     7. Modale panier
+     8. Footer
+     9. Boutons flottants
+    10. Responsive
+   ============================================================ */
+
+
+/* ============================================================
+   1. VARIABLES & RESET
+   ============================================================ */
+:root {
+    /* Palette principale */
+    --color-dark:     #0f172a;
+    --color-light:    #f8fafc;
+    --color-accent:   blue;   /* bleu foncé */
+    --color-muted:    #475569;
+    --color-border:   #e2e8f0;
+
+    /* Topbar */
+    --topbar-bg:      #1c1c1e;
+    --topbar-text:    #e2e8f0;
+
+    /* Navbar */
+    --navbar-bg:      #ffffff;
+    --navbar-height:  68px;
+    --navbar-shadow:  0 2px 16px rgba(15, 23, 42, 0.07);
+
+    /* Typographie */
+    --font-display: 'Syne', sans-serif;
+    --font-body:    'Outfit', sans-serif;
+
+    /* Design tokens */
+    --radius:  16px;
+    --shadow:  0 18px 60px rgba(15, 23, 42, 0.08);
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: var(--font-body);
+    color: var(--color-dark);
+    background: #fff;
+}
+
+/* Conteneur centré */
+.container {
+    width: min(1140px, calc(100% - 2rem));
+    margin: 0 auto;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+
+/* ============================================================
+   2. UTILITAIRES COMPLÉMENTAIRES
+   ============================================================ */
+.d-none    { display: none !important; }
+.text-muted { color: var(--color-muted) !important; }
+.py-5      { padding-top: 3rem; padding-bottom: 3rem; }
+.mt-4      { margin-top: 1.5rem; }
+.mt-5      { margin-top: 3rem; }
+.mb-0      { margin-bottom: 0; }
+.mb-4      { margin-bottom: 1.5rem; }
+.fw-bold   { font-weight: 700; }
+.text-end  { text-align: right; }
+.text-center { text-align: center; }
+.gap-3     { gap: 1rem; }
+.visually-hidden {
+    position: absolute;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0,0,0,0);
+    white-space: nowrap; border: 0;
+}
+
+
+/* ============================================================
+   3. HEADER
+   ============================================================ */
+
+/* ── 3a. Topbar (barre noire supérieure) ────────────────── */
+.topbar {
+    background: var(--topbar-bg);
+    color: var(--topbar-text);
+    font-size: 0.85rem;
+    padding: 0.55rem 0;
+}
+
+.topbar__inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+.topbar__item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    white-space: nowrap;
+}
+
+.topbar__item--phone strong {
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}
+
+.topbar__icon {
+    font-style: normal;
+    font-size: 1rem;
+}
+
+/* ── 3b. Navbar principale ──────────────────────────────── */
+.navbar {
+    background: var(--navbar-bg);
+    box-shadow: var(--navbar-shadow);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.navbar__inner {
+    display: flex;
+    align-items: center;
+    height: var(--navbar-height);
+    gap: 2rem;
+}
+
+/* Logo / nom de marque */
+.navbar__brand {
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.navbar__logo {
+    height: 42px;
+    width: auto;
+}
+
+.navbar__brand-text {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    color: var(--color-dark);
+    letter-spacing: -0.02em;
+}
+
+.navbar__brand-text strong {
+    color: var(--color-accent);
+}
+
+/* Liste de liens */
+.navbar__menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    margin-left: auto;  /* pousse le menu vers la droite */
+}
+
+.navbar__link {
+    text-decoration: none;
+    color: var(--color-dark);
+    font-weight: 500;
+    font-size: 0.95rem;
+    padding: 0.4rem 0.75rem;
+    border-radius: 10px;
+    transition: background 0.18s, color 0.18s;
+    white-space: nowrap;
+}
+
+.navbar__link:hover {
+    background: var(--color-light);
+    color: var(--color-accent);
+}
+
+/* Lien "Devis" — mis en avant avec une couleur de fond */
+.navbar__link--devis {
+    background: var(--color-light);
+    color: var(--color-accent);
+    font-weight: 700;
+    border: 1.5px solid var(--color-accent);
+}
+
+.navbar__link--devis:hover {
+    background: var(--color-accent);
+    color: #fff;
+}
+
+/* Bouton d'appel CTA */
+.btn--call {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: var(--color-accent);
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-decoration: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 12px;
+    white-space: nowrap;
+    transition: opacity 0.18s;
+    flex-shrink: 0;
+}
+
+.btn--call:hover {
+    opacity: 0.9;
+    color: #fff;
+}
+
+/* Burger mobile (masqué par défaut) */
+.navbar__burger {
+    display: none;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 32px;
+    height: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin-left: auto;
+}
+
+.navbar__burger span {
+    display: block;
+    height: 3px;
+    background: var(--color-dark);
+    border-radius: 2px;
+    transition: transform 0.25s, opacity 0.25s;
+}
+
+/* Animation burger → croix */
+.navbar__burger.is-active span:nth-child(1) {
+    transform: translateY(10px) rotate(45deg);
+}
+.navbar__burger.is-active span:nth-child(2) {
+    opacity: 0;
+}
+.navbar__burger.is-active span:nth-child(3) {
+    transform: translateY(-10px) rotate(-45deg);
+}
+
+/* Menu mobile déroulant */
+.navbar__mobile {
+    background: #fff;
+    border-top: 1px solid var(--color-border);
+    padding: 1rem 0;
+}
+
+.navbar__mobile ul {
+    list-style: none;
+    margin: 0;
+    padding: 0 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.navbar__mobile .navbar__link {
+    display: block;
+    padding: 0.65rem 1rem;
+}
+
+
+/* ============================================================
+   4. BANNER HERO
+   Image de fond pleine largeur avec overlay sombre et titre.
+   ============================================================ */
+.banner {
+    position: relative;
+    width: 100%;
+    height: 280px;
+    background-image: url('../img/devis.jpg');
+    /* Étendre l'image à 100% de la largeur tout en conservant le ratio */
+    background-size: 100% auto;
+    /* Focus en haut-centre pour éviter découpe du sujet principal */
+    background-position: center top;
+    background-repeat: no-repeat;
+    overflow: hidden;
+
+    /* Centrage vertical + horizontal du contenu */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Overlay sombre semi-transparent par-dessus l'image */
+.banner__overlay {
+    position: absolute;
+    inset: 0;
+    /* légèrement plus clair pour laisser l'image visible et nette */
+    background: rgba(0, 0, 0, 0.25);
+}
+
+/* Wrapper texte : z-index > overlay, texte centré */
+.banner__content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 0 1rem;
+}
+
+/* Titre principal */
+.banner__title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin: 0 0 0.4rem;
+    line-height: 1;
+}
+
+/* Sous-titre "Select your device" */
+.banner__subtitle {
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.82);
+    margin: 0;
+    letter-spacing: 0.04em;
+}
+
+
+/* ============================================================
+   5. SECTION "PRIX INSTANTANÉ"
+   Stepper de progression + grille de cartes appareils
+   Image de fond passée via style="background-image:url(...)"
+   dans le HTML — remplacer /assets/img/bg-devices.jpg
+   ============================================================ */
+.instant-quote {
+    position: relative;
+    /* Pas de background-color : l'image vient du style inline */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* effet parallaxe léger      */
+}
+
+/* Overlay blanc semi-transparent pour lisibilité du contenu */
+.instant-quote::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.82);
+    z-index: 0;
+    pointer-events: none; /* ne bloque pas les clics sur le contenu */
+}
+
+/* Tout le contenu de la section passe au-dessus de l'overlay */
+.instant-quote > .container {
+    position: relative;
+    z-index: 1;
+}
+
+/* Titre et sous-titre */
+.iq-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 3.2vw, 2.8rem);
+    margin: 0 0 0.4rem;
+    font-weight: 800;
+    color: var(--color-dark); /* reste lisible sur l'overlay blanc */
+}
+
+.iq-subtitle {
+    color: var(--color-muted);
+    margin-top: 0.25rem;
+    font-size: 1rem;
+}
+
+/* ── Stepper ────────────────────────────────────────────── */
+/*
+   Rendu en <ol> pour la sémantique.
+   Les connecteurs sont des <li> dédiés (aria-hidden).
+*/
+.stepper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    gap: 0.5rem;
+    list-style: none;
+    margin: 1.5rem auto 0;
+    padding: 0 0.5rem;
+    max-width: 860px;
+    overflow-x: auto;
+}
+
+/* Élément étape */
+.step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.35rem;
+    min-width: 64px;
+}
+
+/* Point moderne (rectangulaire arrondi) */
+.step__dot {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    border: 2px solid rgba(0,0,0,0.12);
+    background: #ffffff;
+    flex-shrink: 0;
+    transition: transform 220ms ease, background 220ms ease, border-color 220ms ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 0.8rem;
+    color: rgba(0,0,0,0.9);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+
+/* Libellé sous le dot */
+.step__label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #000000;
+    white-space: nowrap;
+}
+
+/* Étape active (sélectionnée en cours) */
+.step--active .step__dot {
+    background: #ffffff;
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+    box-shadow: inset 0 0 0 1px var(--color-accent), 0 4px 10px rgba(15, 23, 42, 0.08);
+    transform: translateY(-1px);
+}
+
+/* Complétée : bulle blanche avec ✓ noir, bord accentué */
+.step--completed .step__dot {
+    background: #ffffff;
+    border-color: var(--color-accent);
+    color: #000000;
+    box-shadow: inset 0 0 0 1px var(--color-accent);
+    transform: translateY(-1px);
+}
+
+/* Icône ✓ pour complété (hérite de la couleur noire) */
+.step--completed .step__dot::after {
+    content: '✓';
+    font-size: 1rem;
+    color: inherit;
+}
+
+/* Colorer le connecteur après une étape complétée */
+.step--completed + .step__connector {
+    background: var(--color-accent);
+}
+
+/* Connecteur horizontal entre les étapes : trait fin */
+.step__connector {
+    flex: 1;
+    height: 2px;
+    background: rgba(0,0,0,0.08);
+    min-width: 12px;
+    margin-bottom: 1.25rem; /* aligner avec les dots */
+    list-style: none;
+    border-radius: 2px;
+}
+
+/* Responsive : scroll horizontal en mobile */
+@media (max-width: 767px) {
+    .stepper { gap: 0.3rem; padding: 0 0.5rem; }
+    .step { min-width: 52px; }
+    .step__dot { width: 30px; height: 30px; border-radius: 6px; font-size: 0.7rem; }
+    .step__label { font-size: 0.65rem; }
+}
+
+/* ── Grille de cartes appareils ─────────────────────────── */
+.device-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+    max-width: 900px;
+    margin: 2.5rem auto 0;
+}
+
+/* Carte individuelle (bouton accessible) */
+.device-card {
+    background: #fff;
+    border: 1.5px solid var(--color-border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 2.5rem 1.5rem;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2rem;
+    transition: transform 0.22s, box-shadow 0.22s, border-color 0.22s;
+    font-family: var(--font-body);
+}
+
+.device-card:hover,
+.device-card:focus-visible {
+    transform: translateY(-4px);
+    box-shadow: 0 28px 70px rgba(15, 23, 42, 0.12);
+    outline: none;
+}
+
+.device-card:focus-visible {
+    border-color: var(--color-accent);
+    outline: 3px solid var(--color-accent);
+    outline-offset: 2px;
+}
+
+/* Carte sélectionnée */
+.device-card--selected {
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2),
+                var(--shadow);
+}
+
+/* Image de l'appareil */
+.device-card__img {
+    width: auto;
+    height: 160px;
+    object-fit: contain;
+    pointer-events: none;
+    transition: transform 0.25s;
+}
+
+.device-card:hover .device-card__img {
+    transform: scale(1.04);
+}
+
+/* Libellé sous l'image */
+.device-card__label {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    letter-spacing: 0.01em;
+}
+
+
+/* ============================================================
+   6. SECTION CATALOGUE (grille de pièces)
+   ============================================================ */
+.catalogue-section {
+    padding: 3rem 0;
+    background: var(--color-light);
+}
+
+.catalogue-title {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    margin-bottom: 0.25rem;
+}
+
+/* Carte produit individuelle */
+.catalogue-card {
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 1.3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    height: 100%;
+}
+
+.product-image {
+    width: 100%;
+    height: 140px;
+    object-fit: contain;
+    border-radius: 14px;
+    background: var(--color-light);
+}
+
+.product-name {
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--color-dark);
+}
+
+.product-price {
+    font-size: 1.2rem;
+    color: var(--color-accent);
+    font-weight: 700;
+}
+
+/* Bouton "Ajouter au devis" */
+.btn-add {
+    border: none;
+    border-radius: 14px;
+    padding: 0.75rem 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    background: var(--color-accent);
+    color: #fff;
+    transition: opacity 0.18s;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+}
+
+.btn-add:hover {
+    opacity: 0.9;
+}
+
+/* Alertes */
+.alert {
+    border-radius: 14px;
+    padding: 1rem 1.25rem;
+}
+
+.alert-warning {
+    background: #fffbeb;
+    border: 1px solid #fde68a;
+    color: #92400e;
+}
+
+.alert-danger {
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    color: #991b1b;
+}
+
+
+/* ============================================================
+   7. MODALE PANIER / DEVIS
+   ============================================================ */
+.modal-content {
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+/* Bouton principal générer devis */
+.btn--primary {
+    background: var(--color-accent);
+    color: #fff;
+    border: none;
+    border-radius: 14px;
+    padding: 0.75rem 1.5rem;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    transition: opacity 0.18s;
+}
+
+.btn--primary:hover {
+    opacity: 0.9;
+}
+
+/* Formulaire dans la modale */
+.form-label {
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 0.35rem;
+    display: block;
+}
+
+.form-control {
+    width: 100%;
+    border: 1px solid var(--color-border);
+    border-radius: 14px;
+    padding: 0.85rem 1rem;
+    font-size: 1rem;
+    color: var(--color-dark);
+    font-family: var(--font-body);
+    transition: border-color 0.18s;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+}
+
+/* Tableau récapitulatif */
+.table-responsive { overflow-x: auto; }
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+}
+
+.table th,
+.table td {
+    padding: 0.75rem 0.5rem;
+    border-bottom: 1px solid var(--color-border);
+    vertical-align: middle;
+}
+
+.table thead th {
+    font-weight: 700;
+    color: var(--color-muted);
+    text-transform: uppercase;
+    font-size: 0.78rem;
+    letter-spacing: 0.05em;
+}
+
+
+/* ============================================================
+   8. FOOTER
+   ============================================================ */
+.site-footer {
+    background: var(--color-dark);
+    color: var(--topbar-text);
+    padding: 2.5rem 0;
+    font-size: 0.9rem;
+}
+
+.footer-address {
+    color: var(--color-muted);
+    font-size: 0.85rem;
+}
+
+.footer-link {
+    color: var(--color-accent);
+    text-decoration: none;
+    font-size: 0.85rem;
+}
+
+.footer-link:hover {
+    text-decoration: underline;
+}
+
+
+/* ============================================================
+   9. BOUTONS FLOTTANTS
+   ============================================================ */
+
+/* Base commune */
+.btn-floating {
+    position: fixed;
+    right: 1.5rem;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.18);
+    transition: opacity 0.25s, transform 0.25s;
+    z-index: 200;
+}
+
+/* Bouton "remonter en haut" */
+#btn-top {
+    bottom: 5.5rem;
+    background: var(--color-dark);
+    color: #fff;
+    opacity: 0;
+    pointer-events: none;
+}
+
+#btn-top.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+#btn-top:hover {
+    transform: translateY(-3px);
+}
+
+/* Bouton panier flottant */
+.btn-floating--panier {
+    bottom: 1.5rem;
+    background: var(--color-accent);
+    color: #fff;
+    width: auto;
+    padding: 0 1.2rem;
+    border-radius: 24px;
+    gap: 0.5rem;
+    font-weight: 700;
+}
+
+.panier-badge {
+    background: #fff;
+    color: var(--color-accent);
+    font-weight: 800;
+    font-size: 0.8rem;
+    border-radius: 99px;
+    padding: 0.1rem 0.5rem;
+    min-width: 22px;
+    text-align: center;
+}
+
+
+/* ============================================================
+  10. RESPONSIVE
+   ============================================================ */
+
+/* Tablette / petits écrans */
+@media (max-width: 991px) {
+    .navbar__menu,
+    .btn--call {
+        display: none; /* masqués au profit du burger */
+    }
+
+    .navbar__burger {
+        display: flex;
+    }
+
+    .topbar__inner {
+        gap: 1rem;
+        font-size: 0.78rem;
+    }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+    .device-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.85rem;
+    }
+
+    .device-card {
+        padding: 1.5rem 0.75rem;
+    }
+
+    .device-card__img {
+        height: 110px;
+    }
+
+    .banner {
+        height: 200px;
+    }
+
+    .stepper {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        justify-content: flex-start;
+        padding-bottom: 0.5rem;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .step__connector {
+        min-width: 18px;
+    }
+
+    .topbar__item:first-child {
+        display: none; /* masquer la localisation sur très petit écran */
+    }
+}
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.site-footer {
+    background: #1a1a1e;
+    color: #e2e8f0;
+    font-family: var(--font-body);
+}
+
+/* Grille principale */
+.footer-main {
+    padding: 3.5rem 0 2.5rem;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+}
+
+/* ── Colonne marque ── */
+.footer-logo-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    text-decoration: none;
+    margin-bottom: 1rem;
+}
+
+.footer-logo-img {
+    height: 42px;
+    width: 42px;
+    object-fit: contain;
+    border-radius: 10px;
+}
+
+.footer-logo-text {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    color: #fff;
+    letter-spacing: -0.02em;
+}
+
+.footer-logo-text strong {
+    color: var(--color-accent);
+}
+
+.footer-address {
+    font-size: 0.88rem;
+    color: #94a3b8;
+    line-height: 1.7;
+    margin: 0 0 1.25rem;
+    font-style: normal;
+}
+
+.footer-socials {
+    display: flex;
+    gap: 0.6rem;
+}
+
+.footer-social {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.07);
+    color: #94a3b8;
+    transition: background 0.18s, color 0.18s;
+    text-decoration: none;
+}
+
+.footer-social:hover {
+    background: var(--color-accent);
+    color: #fff;
+}
+
+/* ── Colonnes liens ── */
+.footer-col__title {
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #fff;
+    margin: 0 0 1.1rem;
+}
+
+.footer-col__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.footer-col__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: 0.9rem;
+    color: #94a3b8;
+    text-decoration: none;
+    transition: color 0.18s;
+}
+
+.footer-col__link:hover {
+    color: #fff;
+}
+
+.footer-col__icon {
+    font-style: normal;
+    font-size: 0.95rem;
+}
+
+/* ── Barre du bas ── */
+.footer-bottom {
+    padding: 1.1rem 0;
+}
+
+.footer-bottom__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.footer-bottom__copy {
+    font-size: 0.82rem;
+    color: #475569;
+    margin: 0;
+}
+
+.footer-bottom__nav {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.footer-bottom__link {
+    font-size: 0.82rem;
+    color: #475569;
+    text-decoration: none;
+    transition: color 0.18s;
+}
+
+.footer-bottom__link:hover {
+    color: #94a3b8;
+}
+
+/* ── Responsive footer ── */
+@media (max-width: 991px) {
+    .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+    }
+    .footer-brand {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (max-width: 600px) {
+    .footer-grid {
+        grid-template-columns: 1fr;
+    }
+    .footer-bottom__inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+}

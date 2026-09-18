@@ -1,0 +1,31 @@
+{
+    "id": "20260603-063931-57967d0b",
+    "created_at": "2026-06-03 06:39:31",
+    "ip": "::1",
+    "client": {
+        "nom": "zdzzrr",
+        "telephone": "02038122",
+        "email": "dz@fe.fe",
+        "adresse": {
+            "rue": "12 rue",
+            "cp": "21333",
+            "ville": ""
+        }
+    },
+    "produits": [
+        {
+            "id": 8375,
+            "nom": "Ecran Tactile Premium Blackview A50 Noir",
+            "prix_client_ttc": "46.95"
+        },
+        {
+            "nom": "Livraison express fournisseur",
+            "prix_client_ttc": 10
+        },
+        {
+            "nom": "Main d'œuvre Réparation (1 h)",
+            "prix_client_ttc": 50
+        }
+    ],
+    "total_ttc": 106.95
+}

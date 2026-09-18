@@ -1,0 +1,26 @@
+server {
+    listen 80;
+    server_name tarifs.biscaphone.fr;
+
+    root /path/to/your/project/Public;
+    index index.php;
+
+    access_log /var/log/nginx/biscaphone.access.log;
+    error_log  /var/log/nginx/biscaphone.error.log;
+
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    location ~ \.php$ {
+        include fastcgi_params;
+        fastcgi_pass unix:/run/php/php8.1-fpm.sock;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        fastcgi_index index.php;
+    }
+
+    location ~* \.(css|js|png|jpg|jpeg|gif|svg|ico)$ {
+        expires 30d;
+        access_log off;
+    }
+}

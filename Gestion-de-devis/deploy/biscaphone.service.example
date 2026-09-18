@@ -1,0 +1,13 @@
+[Unit]
+Description=BiscaPhone Tarifs PHP application
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+WorkingDirectory=/path/to/your/project
+ExecStart=/usr/bin/php -S 0.0.0.0:3000 -t Public
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

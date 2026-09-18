@@ -1,0 +1,31 @@
+{
+    "id": "20260603-063656-4576d72c",
+    "created_at": "2026-06-03 06:36:56",
+    "ip": "::1",
+    "client": {
+        "nom": "dcsc",
+        "telephone": "01029102",
+        "email": "sc@fe.de",
+        "adresse": {
+            "rue": "12 rie",
+            "cp": "20111",
+            "ville": ""
+        }
+    },
+    "produits": [
+        {
+            "id": 3218,
+            "nom": "Smartphone Alcatel 1 2021 5033D 1Go 8Go NEUF Bleu",
+            "prix_client_ttc": "88.20"
+        },
+        {
+            "nom": "Livraison express fournisseur",
+            "prix_client_ttc": 10
+        },
+        {
+            "nom": "Main d'œuvre Réparation (1 h)",
+            "prix_client_ttc": 50
+        }
+    ],
+    "total_ttc": 148.2
+}
